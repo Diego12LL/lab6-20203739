@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CancionDao {
+    private static String url = "jdbc:mysql://localhost:3306/lab6sw1?serverTimezone=America/Lima";
     public ArrayList<Cancion> listarCancioneRecomendadas() {
         ArrayList<Cancion> listaCancionesRecomen = new ArrayList<>();
 
