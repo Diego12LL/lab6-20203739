@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CancionDao {
-    private static String url = "jdbc:mysql://localhost:3306/lab6sw1?serverTimezone=America/Lima";
+
     public ArrayList<Cancion> listarCancioneRecomendadas() {
         ArrayList<Cancion> listaCancionesRecomen = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class CancionDao {
                 "inner join cancion c on r.cancion_idcancion = c.idcancion \n" +
                 "group by cancion_idcancion having count(*)>2 \n" +
                 "order by count(*) desc;";
-        String url = "jdbc:mysql://localhost:3306/lab6sw1";
+        String url = "jdbc:mysql://localhost:3306/lab6sw1?serverTimezone=America/Lima";
         try (Connection connection = DriverManager.getConnection(url, "root", "root");
              Statement stmt = connection.createStatement();
              ResultSet resultSet = stmt.executeQuery(sql)) {

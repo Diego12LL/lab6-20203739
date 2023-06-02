@@ -1,7 +1,7 @@
 <%@ page import="Beans.Cancion" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% ArrayList<Cancion> listaCancionesRecomen = (ArrayList<Cancion>) request.getAttribute("listaCancionesRecomend"); %>
+<% ArrayList<Cancion> listaCancionesRecomen = (ArrayList<Cancion>) request.getAttribute("listaCancionesRecomen"); %>
 <%--
   Created by IntelliJ IDEA.
   User: djcll
@@ -12,8 +12,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <!--Colocar como value: nombre de la presente página -->
-<jsp:include page="cancionesRecomendadas.jsp">
-    <jsp:param name="title" value="Bienvenido"/>
+<jsp:include page="/static/head.jsp">
+    <jsp:param name="title" value="CancionesRecomendadas"/>
 </jsp:include>
 <body>
 <div class='container'>
