@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "ServletCancion",urlPatterns = {"/listaRecomendados"})
-public class ServletCancion extends HttpServlet {
+@WebServlet(name = "ServletCancionRecomendada",urlPatterns = {"/listaRecomendados"})
+public class ServletCancionRecomendada extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
@@ -21,6 +21,7 @@ public class ServletCancion extends HttpServlet {
 
         RequestDispatcher view =request.getRequestDispatcher("cancionesRecomendadas.jsp");
         view.forward(request,response);
+
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

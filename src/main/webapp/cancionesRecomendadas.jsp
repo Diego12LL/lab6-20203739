@@ -19,7 +19,7 @@
 <div class='container'>
     <!--Colocar como value: artistas, canciones, bandas, tours o tpc  (dependiendo de la pagina a la que corresponda) -->
     <jsp:include page="/includes/navbar.jsp">
-        <jsp:param name="page" value="canciones"/>
+        <jsp:param name="page" value="cancionesRecomen"/>
     </jsp:include>
     <div class="pb-5 pt-4 px-3 titlecolor d-flex justify-content-between align-items-center">
         <div class="col-lg-6">
@@ -47,7 +47,7 @@
                     </td>
                     <td><%=c.getBanda() %>
                     </td>
-                    <td>stuardo.lucho@pucp.edu.pe
+                    <td><button type="submit" class="btn btn-primary" style="background-color: #28a745; border-color: #28a745">Más de la banda</button>
                     </td>
                 </tr>
             <%}%>
