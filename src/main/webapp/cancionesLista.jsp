@@ -44,6 +44,8 @@
         </td>
         <td><%=c1.getBanda() %>
         </td>
+        <td><a href="<%=request.getContextPath()%>/ServletCanciones?a=actualizar&estado=<%=c1.getEstado()%>">Añadir</a>
+        </td>
       </tr>
       <%}%>
       </tbody>

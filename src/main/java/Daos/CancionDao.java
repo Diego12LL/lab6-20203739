@@ -97,4 +97,28 @@ public class CancionDao {
         }
         return listaCanciones;
     }
+
+    public void actualizarEstado(Cancion cancion) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String url = "jdbc:mysql://localhost:3306/hr";
+        String sql = "UPDATE cancion SET estado = ? WHERE idcancion = ?";
+        try (Connection connection = DriverManager.getConnection(url, "root", "root");
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setInt(1, cancion.getIdCancion());
+            pstmt.setBoolean(4, cancion.getEstado());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

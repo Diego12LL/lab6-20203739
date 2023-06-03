@@ -4,6 +4,7 @@ public class Cancion {
     private int idCancion;
     private String banda;
     private String nombre_cancion;
+    private boolean estado;
 
     public int getIdCancion() {
         return idCancion;
@@ -27,5 +28,13 @@ public class Cancion {
 
     public void setNombre_cancion(String nombre_cancion) {
         this.nombre_cancion = nombre_cancion;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }
