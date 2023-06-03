@@ -12,7 +12,7 @@
 <html>
 <!--Colocar como value: nombre de la presente página -->
 <jsp:include page="/static/head.jsp">
-  <jsp:param name="title" value="cancionesPorBanda"/>
+  <jsp:param name="title" value="ListaCancionesTotales"/>
 </jsp:include>
 <body>
 <div class='container'>
@@ -44,7 +44,13 @@
         </td>
         <td><%=c1.getBanda() %>
         </td>
-        <td><a href="<%=request.getContextPath()%>/ServletCanciones?a=actualizar&estado=<%=c1.getEstado()%>">Añadir</a>
+        <td>
+          <form  method="POST" action="<%=request.getContextPath()%>/ServletCanciones?action=actualizarEstado">
+            <!--<a method="POST" action= "<%=request.getContextPath()%>/ServletCanciones?p=actualizarEstado" href="<%=request.getContextPath()%>/listaCanciones">Añadir a fav</a>
+            -->
+            <a href="<%=request.getContextPath()%>/listaCanciones" type="hidden" name="idcancion" id="idcancion"
+               value="<%=c1.getIdCancion()%>">Añadir a fav</a>
+          </form>
         </td>
       </tr>
       <%}%>

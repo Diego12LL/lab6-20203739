@@ -21,36 +21,39 @@ public class ServletCanciones extends HttpServlet {
 
         CancionDao cancionDao= new CancionDao();
 
-        request.setAttribute("listaCanciones",cancionDao.listarCanciones());
+        String action = request.getParameter("action") == null ? "listar" : request.getParameter("action");
 
-        RequestDispatcher view=request.getRequestDispatcher("cancionesLista.jsp");
-        view.forward(request,response);
+        switch (action) {
+            case "listar":
+                request.setAttribute("listaCanciones", cancionDao.listarCanciones());
+                request.getRequestDispatcher("cancionesLista.jsp").forward(request, response);
+                break;
+            case "actualizarEstado":
+                String id=request.getParameter("id");
+                request.setAttribute("cancion", cancionDao.listar(id));
+                request.getRequestDispatcher("cancionesFav.jsp").forward(request, response);
+                break;
+        }
+
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //String action = request.getParameter("p") == null ? "crear" : request.getParameter("p");
+        String action = request.getParameter("action") == null ? "actualizarEstado" : request.getParameter("action");
+        request.setCharacterEncoding("UTF-8");
+        CancionDao cancionDao = new CancionDao();
+        RequestDispatcher view;
 
-        CancionDao cancionDao =new CancionDao();
-        Cancion cancion =parseCancion(request);
-        cancionDao.actualizarEstado(cancion);
-        response.sendRedirect(request.getContextPath() + "/ServletCanciones");
-    }
+        switch (action) {
 
-    public Cancion parseCancion(HttpServletRequest request) {
+            case "actualizarEstado":
+                int idcancion = Integer.parseInt(request.getParameter("idcancion"));
 
-        Cancion cancion = new Cancion();
-        String estado = request.getParameter("estado");
+                cancionDao.actualizarEstado(idcancion);
 
-        try {
-
-            cancion.setEstado(parseBoolean(estado));
-
-            return cancion;
-
-        } catch (NumberFormatException e) {
-
+                response.sendRedirect(request.getContextPath() + "/listaCanciones");
+                break;
         }
-        return cancion;
     }
+
 
 }
 

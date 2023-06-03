@@ -98,20 +98,19 @@ public class CancionDao {
         return listaCanciones;
     }
 
-    public void actualizarEstado(Cancion cancion) {
+    public void actualizarEstado(int idcancion) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        String url = "jdbc:mysql://localhost:3306/hr";
-        String sql = "UPDATE cancion SET estado = ? WHERE idcancion = ?";
+        String url = "jdbc:mysql://localhost:3306/lab6sw1?serverTimezone=America/Lima";
+        String sql = "UPDATE cancion SET estado = 1 WHERE idcancion = ?;";
         try (Connection connection = DriverManager.getConnection(url, "root", "root");
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setInt(1, cancion.getIdCancion());
-            pstmt.setBoolean(4, cancion.getEstado());
+            pstmt.setInt(1, idcancion);
 
             pstmt.executeUpdate();
 
@@ -120,5 +119,37 @@ public class CancionDao {
         }
     }
 
+    public Cancion listar(String id) {
+        Cancion cancion = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "select * from cancion where idcancion = ?";
+        String url = "jdbc:mysql://localhost:3306/lab6sw1?serverTimezone=America/Lima";
+        try (Connection connection = DriverManager.getConnection(url, "root", "root");
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, id);
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    cancion = new Cancion();
+                    cancion.setIdCancion(rs.getInt(1));
+                    cancion.setNombre_cancion(rs.getString(2));
+                    cancion.setBanda(rs.getString(3));
+                    cancion.setEstado(rs.getBoolean(4));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return cancion;
+    }
 
 }
